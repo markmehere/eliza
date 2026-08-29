@@ -68,7 +68,7 @@ describe('ElizaBrain', () => {
       ...basicExchange,
       "i am very sad",
     ]);
-    expect(response.message).toBe('Sorry to hear you are. Tell me about it.');
+    expect(response.message).toBe('Sorry to hear. Tell me about it.');
   });
 
   it('i am bored', () => {

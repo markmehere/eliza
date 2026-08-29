@@ -1,9 +1,9 @@
 .parent {
   display: flex;
   flex-direction: column;
-  width: 80%;
   height: 100%;
-  margin-bottom: 2rem;
+  width: 100%;
+  margin-bottom: 0;
   backdrop-filter: blur(12px);
   box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.08),
@@ -12,10 +12,10 @@
   overflow: hidden;
 }
 
-@media (max-width: 800px) {
+@media (min-width: 800px) and (pointer: fine) {
   .parent {
-    width: 100%;
-    margin-bottom: 0;
+    width: 80%;
+    margin-bottom: 2rem;
   }
 }
 
@@ -37,5 +37,11 @@
 
   p:last-child {
     margin-bottom: 4rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .scratchpad {
+    padding: 1rem 0.5rem 0 0.5rem;
   }
 }

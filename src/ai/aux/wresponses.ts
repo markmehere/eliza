@@ -65,7 +65,7 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   you: {
     weight: 1,
-    responses: ['We were discussing you, not me.', 'Why do you say that about me?', 'Why do you care whether I "*"?'],
+    responses: ['We were discussing you, not me.', 'Why do you say that about me?', 'Why do you care whether I *?'],
     which: Dialogue.YOU,
   },
   no: {
@@ -117,14 +117,14 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     responses: [
       'How important is companionship in your life?',
       'How is your romantic life?',
-      'Do you still feel loved by if not by a partner then by friends or family?',
+      'Do you still feel loved, if not by a partner, then by friends or family?',
     ],
     which: Dialogue.FRIENDS,
   },
   lonely: {
     weight: 5,
     responses: [
-      'Do you often feel lonley?',
+      'Do you often feel lonely?',
       'Tell me more about feeling lonely.',
       'Do you think you would feel lonely when travelling or eating on your own?',
       'Do you feel loneliness is more about emotion than circumstance?',
@@ -209,7 +209,7 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     weight: 5,
     responses: [
       'Do you often think of *?',
-      'Does thinking of * bring anything else to mind',
+      'Does thinking of * bring anything else to mind?',
       'What else do you recollect?',
       'Why do you recollect * just now?',
       'What in the present situation reminds you of *?',
@@ -244,7 +244,7 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
       'Could you expand on how computers are related?',
       'What do you think machines have to do with your problem?',
       "Don't you think computers can help people?",
-      'What about machines worrys you?',
+      'What about machines worries you?',
       'What do you think about machines?',
     ],
     which: Dialogue.COMPUTER,
@@ -297,12 +297,12 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   'i desired': {
     weight: 3,
-    responses: ['Did you achieve it or simply moved on?'],
+    responses: ['Did you achieve it or simply move on?'],
     which: Dialogue.DESIRE,
   },
   'i am sad': {
     weight: 3,
-    responses: ['Sorry to hear you are. Tell me about it.'],
+    responses: ['Sorry to hear. Tell me about it.'],
     which: Dialogue.IAMSAD,
   },
   'i am happy': {

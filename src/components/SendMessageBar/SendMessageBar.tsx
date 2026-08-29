@@ -21,6 +21,8 @@ export function SendMessageBar() {
   }, [autoExpand]);
 
   useEffect(() => {
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchDevice) return;
     window.addEventListener('resize', autoExpand);
     return () => window.removeEventListener('resize', autoExpand);
   }, [autoExpand]);
@@ -31,6 +33,10 @@ export function SendMessageBar() {
     addPrompt(input);
     setInput('');
     if (textareaRef.current) {
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+      if (isTouchDevice) {
+        textareaRef.current.blur();
+      }
       textareaRef.current.style.height = 'auto';
     }
   };

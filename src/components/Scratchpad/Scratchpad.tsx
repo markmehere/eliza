@@ -14,6 +14,7 @@ export function Scratchpad({ className, forcedDialogue, clearForcedDialogue }: S
   const [revealed, setRevealed] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const maxChatLen = useRef(chat.length);
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
   useEffect(() => {
     const revealInterval = setInterval(() => {
@@ -66,7 +67,7 @@ export function Scratchpad({ className, forcedDialogue, clearForcedDialogue }: S
           }
         })}
       </div>
-      <MessageNeeded forcedDialogue={forcedDialogue} clearForcedDialogue={clearForcedDialogue} />
+      {!isTouchDevice && <MessageNeeded forcedDialogue={forcedDialogue} clearForcedDialogue={clearForcedDialogue} />}
     </div>
   );
 }

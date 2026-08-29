@@ -73,7 +73,7 @@ export const dialogueTranslation = {
   [Dialogue.YOUR]: 'Why are you concerned over my ...?',
   [Dialogue.WASI]: 'What if you were ...?',
   [Dialogue.DESIRE]: 'Why do you want it?',
-  [Dialogue.IAMSAD]: 'Sorry to hear you are. Tell me about it.',
+  [Dialogue.IAMSAD]: 'Sorry to hear. Tell me about it.',
   [Dialogue.IAMHAPPY]: "That's good. What is making you happy?",
   [Dialogue.IAMBORED]: 'What makes you bored?',
   [Dialogue.GOODBYE]: 'Goodbye. Thank you for talking to me.',

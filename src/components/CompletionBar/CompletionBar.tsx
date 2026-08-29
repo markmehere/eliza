@@ -57,7 +57,7 @@ export function CompletionBar({ className, forceDialogue }: CompletionBarProps) 
         overlayClassName={styles.modalOverlay}
       >
         <div className={styles.modalHeader}>
-          <h2>Residual Therepeutic Touchstones</h2>
+          <h2>Residual Therapeutic Touchstones</h2>
           <button className={styles.closeButton} onClick={() => setShowCompletionModal(false)} aria-label="Close">
             ✕
           </button>

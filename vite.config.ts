@@ -24,6 +24,8 @@ const gitHashPlugin: Plugin = {
 
 
 export default defineConfig({
+  base: './',
+
   plugins: [
     gitHashPlugin,
     react(),

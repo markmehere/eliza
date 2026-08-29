@@ -38,7 +38,7 @@ export function App() {
   return (
     <>
       {isActive(Page.App) && (
-        <div className="flex items-center flex-col h-screen">
+        <div className="flex items-center flex-col h-dvh">
           <Eliza className="w-25 ml-2 mt-5 shrink-0" prebake={700} />
           <CompletionBar className="p-5 shrink-0" forceDialogue={setForcedDialogue} />
           <Scratchpad forcedDialogue={forcedDialogue} clearForcedDialogue={() => setForcedDialogue(-1)} />
