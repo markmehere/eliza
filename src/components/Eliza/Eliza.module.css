@@ -1,0 +1,137 @@
+:global(#mouth_pipe) {
+  visibility: hidden;
+}
+
+.pipe {
+  transition: opacity, x, y;
+}
+
+.pipe :global(#mouth_pipe) {
+  visibility: visible;
+}
+
+.pipe :global(#pipe_smoke) {
+  opacity: 0;
+  animation: leftSmoke 12s ease-in-out infinite;
+}
+
+.pipe :global(#pipe_smoke_alt) {
+  opacity: 0;
+  animation: rightSmoke 12s ease-in-out infinite;
+}
+
+@keyframes leftSmoke {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes rightSmoke {
+  70% {
+    opacity: 0.8;
+  }
+  50%,
+  90% {
+    opacity: 0;
+  }
+}
+
+.idle :global(#left_brow) path,
+.idle :global(#right_brow) path,
+.idle :global(#left_lid) path,
+.idle :global(#right_lid) path {
+  animation: browShift 8s ease-in-out infinite;
+}
+
+@keyframes browShift {
+  0%,
+  30% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(3px);
+  }
+}
+
+.talking :global(#left_brow) path,
+.talking :global(#right_brow) path {
+  animation: browRaise 2s ease-in-out infinite;
+}
+
+@keyframes browRaise {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(2px);
+  }
+  60% {
+    transform: translateY(0px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+}
+
+.talking :global(#combo) {
+  animation: moustacheShift 0.5s ease-in-out infinite;
+}
+
+.talking :global(#combo) :global(#mouth) path {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: mouthScale 0.5s ease-in-out infinite;
+}
+
+.talking :global(#chin) {
+  animation: chinMove 0.5s ease-in-out infinite;
+}
+
+@keyframes chinMove {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(6px);
+  }
+  60% {
+    transform: translate(-2px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes mouthScale {
+  0% {
+    transform: scaleY(1);
+  }
+  40% {
+    transform: scaleY(2.4);
+  }
+  60% {
+    transform: scaleY(0.8);
+  }
+  80% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes moustacheShift {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+}

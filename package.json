@@ -1,0 +1,49 @@
+{
+  "name": "Eliza",
+  "version": "1.0.0",
+  "description": "a therapist of sorts",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build",
+    "test": "jest",
+    "start": "vite",
+    "format": "biome format --write src",
+    "lint": "biome lint src",
+    "lint:fix": "biome check --write src",
+    "lint:unsafe": "biome check --write --unsafe src"
+  },
+  "author": "Mark Pazolli",
+  "license": "MIT",
+  "dependencies": {
+    "@types/react-modal": "^3.16.3",
+    "framer-motion": "^13.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-modal": "^3.16.3",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.6",
+    "@swc/core": "^1.15.47",
+    "@swc/jest": "^0.2.39",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.1.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react-swc": "^4.3.3",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.0",
+    "vite-plugin-svgr": "^5.2.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.20.0",
+      "onFail": "warn"
+    }
+  }
+}
