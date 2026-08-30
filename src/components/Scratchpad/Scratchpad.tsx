@@ -38,6 +38,13 @@ export function Scratchpad({ className, forcedDialogue, clearForcedDialogue, sim
   }, [chat.length, ghost?.length]);
 
 
+  useEffect(() => {
+    if (scrollRef.current) {
+      console.log(scrollRef.current.scrollHeight);
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [chat.length % 2 ? (chat?.[chat.length - 1] || '').substring(0, revealed) : '']);
+
 
   if (simplified) {
     return <div ref={scrollRef} className={styles.simparent}>

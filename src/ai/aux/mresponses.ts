@@ -84,7 +84,10 @@ export function oneWordExcluded(input: string) {
     input.indexOf('definitely') > -1,
     input.indexOf('bye') > -1,
     input.indexOf('leave') > -1,
-    input.indexOf('exit') > -1
+    input.indexOf('exit') > -1,
+    input.indexOf('huh') > -1,
+    input.indexOf('what') > -1,
+    input.indexOf('certainly') > -1
   ].reduce((acc, val) => acc || val);
 }
 
