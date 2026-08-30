@@ -9,4 +9,5 @@ declare module '*.css';
 
 interface Window {
   gitVersion: string;
+  saneShown: boolean;
 }

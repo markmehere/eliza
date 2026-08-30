@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
 import styles from './SaneStamp.module.css';
 
 export function SaneStamp() {
+
+  useEffect(() => {
+    if (window.saneShown) return;
+    let tid = setTimeout(() => window.saneShown = true, 1000);
+    return clearTimeout(tid);
+  }, []);
+
+  if (window.saneShown) return null;
+
   return (
     <svg viewBox="0 0 954 646" version="1.1" className={styles.stamp}>
       <g transform="matrix(0.777845,-0.30179,0.30179,0.777845,-325.622468,-466.733403)">

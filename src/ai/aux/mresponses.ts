@@ -73,7 +73,7 @@ export function moreThanOneWord(_ignored: string) {
 }
 
 export function oneWordExcluded(input: string) {
-  return [
+  const result = [
     input.indexOf('yes') > -1,
     input.indexOf('no') > -1,
     input.indexOf('nup') > -1,
@@ -87,8 +87,11 @@ export function oneWordExcluded(input: string) {
     input.indexOf('exit') > -1,
     input.indexOf('huh') > -1,
     input.indexOf('what') > -1,
+    input.indexOf('hi') > -1,
+    input.indexOf('hello') > -1,
     input.indexOf('certainly') > -1
   ].reduce((acc, val) => acc || val);
+  return result;
 }
 
 export function isNotClear(input: string) {

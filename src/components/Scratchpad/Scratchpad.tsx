@@ -40,7 +40,6 @@ export function Scratchpad({ className, forcedDialogue, clearForcedDialogue, sim
 
   useEffect(() => {
     if (scrollRef.current) {
-      console.log(scrollRef.current.scrollHeight);
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [chat.length % 2 ? (chat?.[chat.length - 1] || '').substring(0, revealed) : '']);

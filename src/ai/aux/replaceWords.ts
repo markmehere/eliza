@@ -18,8 +18,8 @@ const wordsForReplacement: Record<string, string> = {
   myself: 'yourself',
 };
 
-export function processInput(message: string) {
-  return message
+export function processInput(message?: string) {
+  return (message || '')
     .replace(/[,;.?!:]/g, '')
     .replace(/[\n ]+/g, ' ')
     .trim()

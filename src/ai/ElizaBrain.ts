@@ -27,7 +27,7 @@ export class ElizaBrain {
   analyzeOne(message: string, preamble = '') {
     let found = false;
     let response: { message: string; which: Dialogue } | undefined;
-    let newMessage = processInput(message).replace(/you're +/g, 'you are ');
+    let newMessage = message.replace(/you're +/g, 'you are ');
     let word = '';
 
     if (this.endChatTerms.find(m => m.indexOf(newMessage) > -1)) {
@@ -98,8 +98,8 @@ export class ElizaBrain {
   }
 
   analyze(exchange: string[], becameSane = false) {
-    const last = exchange[exchange.length - 1];
-    const beforeLast = exchange[exchange.length - 3];
+    const last = processInput(exchange[exchange.length - 1]);
+    const beforeLast = processInput(exchange[exchange.length - 3]);
     const preamble = becameSane ? "I think it's important to note we've made real progress in our sessions. So... " :
       '';
 
@@ -110,7 +110,7 @@ export class ElizaBrain {
         message: preamble + result.message,
         which: Dialogue.WELCOME,
       };
-    } else if (processInput(last) === processInput(beforeLast)) {
+    } else if (last === beforeLast) {
       return {
         message: preamble + repetition(last),
         which: Dialogue.REPETITION,
@@ -121,8 +121,8 @@ export class ElizaBrain {
         which: Dialogue.NOTCLEAR,
       }
     } else if (
-      processInput(last).indexOf(' ') === -1 &&
-      processInput(beforeLast).indexOf(' ') === -1 &&
+      last.indexOf(' ') === -1 &&
+      beforeLast.indexOf(' ') === -1 &&
       !oneWordExcluded(last)
     ) {
       return {
