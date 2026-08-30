@@ -1,6 +1,7 @@
 .parent {
   display: flex;
   flex-direction: column;
+  flex: 1;
   height: 100%;
   width: 100%;
   margin-bottom: 0;
@@ -12,18 +13,27 @@
   overflow: hidden;
 }
 
+.simparent {
+  height: 50dvh;
+  width: 100%;
+  margin-bottom: 0;
+  overflow-y: auto;
+}
+
 @media (min-width: 800px) and (pointer: fine) {
   .parent {
     width: 80%;
     margin-bottom: 2rem;
   }
 }
-
 .scratchpad {
-  font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   flex: 1;
   overflow-y: auto;
+}
+
+.scratchpad, .simparent {
+  font-family: Arial, Helvetica, sans-serif;
   padding: 1rem 2rem 0 2rem;
 
   p {

@@ -83,7 +83,7 @@ export class ElizaBrain {
         .replace(/  +/g, ' ').replace(/ \?/g, '?');
     }
     else if (response) {
-      response.message = response.message.replace(/  +/g, ' ').replace(/ \?/g, '?');
+      response.message = response.message.replace(/  +/g, ' ').replace(/ ([?|.])/g, (c) => c[1]);
     }
 
     if (response && response.message.indexOf('@') !== -1) {

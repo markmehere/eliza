@@ -4,7 +4,7 @@
   "description": "a therapist of sorts",
   "main": "index.js",
   "scripts": {
-    "build": "vite build && cd dist && zip -r ../eliza.zip . && cd ..",
+    "build": "vite build && cd dist && rm -f ../eliza.zip && zip -r ../eliza.zip . && cd ..",
     "test": "jest",
     "start": "vite",
     "format": "biome format --write src",

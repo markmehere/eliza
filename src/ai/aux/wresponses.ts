@@ -316,7 +316,7 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     which: Dialogue.IAMBORED,
   },
   shit: {
-    weight: 2,
+    weight: 4,
     responses: ['Please try to use respectful language @.', "Let's try to lower the intensity a bit @.", 'I always try to avoid swear words.'],
     which: Dialogue.SWEAR,
   },

@@ -17,7 +17,7 @@
 
 .banner {
   display: flex;
-  margin-top: calc(50vh - 12vw - 4vh);
+  margin-top: calc(50dvh - 12vw - 4dvh);
   margin-left: 19vw;
   z-index: 20;
 

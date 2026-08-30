@@ -1,12 +1,23 @@
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useChat } from '../../hooks/useChat';
 import styles from './SendMessageBar.module.css';
 
-export function SendMessageBar() {
+interface SendMessageBarProps {
+  setSimplified: (value: boolean) => void,
+  simplified?: boolean
+  combination: [string, Dispatch<SetStateAction<string>>]
+}
+
+export function SendMessageBar({
+  setSimplified,
+  simplified,
+  combination
+}: SendMessageBarProps) {
   const { readyForInput, addPrompt } = useChat();
-  const [input, setInput] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+  const [input, setInput] = combination;
 
   const autoExpand = () => {
     const textarea = textareaRef.current;
@@ -18,22 +29,22 @@ export function SendMessageBar() {
 
   useEffect(() => {
     autoExpand();
-  }, [autoExpand]);
+  }, [input.length]);
 
   useEffect(() => {
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchDevice && simplified && textareaRef.current) textareaRef.current.focus();
     if (isTouchDevice) return;
     window.addEventListener('resize', autoExpand);
     return () => window.removeEventListener('resize', autoExpand);
-  }, [autoExpand]);
+  }, []);
 
   const handleSend = (e: any) => {
     e.preventDefault();
     if (!readyForInput) return;
+    if (!input.trim()) return;
     addPrompt(input);
     setInput('');
     if (textareaRef.current) {
-      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
       if (isTouchDevice) {
         textareaRef.current.blur();
       }
@@ -49,7 +60,7 @@ export function SendMessageBar() {
   };
 
   return (
-    <form onSubmit={handleSend} className={styles.messageForm}>
+    <form onSubmit={handleSend} className={`${styles.messageForm} ${simplified ? '' : 'flex-none'}`}>
       <textarea
         ref={textareaRef}
         value={input}
@@ -57,6 +68,8 @@ export function SendMessageBar() {
         onKeyDown={handleKeyDown}
         placeholder="Type a message..."
         className={styles.messageInput}
+        onFocus={() => isTouchDevice ? setSimplified(true) : undefined}
+        onBlur={() => setTimeout(() => setSimplified(false), 200)}
       />
 
       <motion.button

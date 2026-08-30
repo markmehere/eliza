@@ -147,7 +147,7 @@
 @media (min-width: 800px) and (pointer: fine) {
   .modalContent {
     width: 90vw;
-    max-height: 80vh;
+    max-height: 80dvh;
   }
 }
 

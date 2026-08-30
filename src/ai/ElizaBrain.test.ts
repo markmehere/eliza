@@ -103,12 +103,19 @@ describe('ElizaBrain', () => {
     expect(response.message).toBe("You seem quite certain?");
   });
 
-
   it('not found', () => {
     const response = brain.analyze([
       ...basicExchange,
       "It's important",
     ]);
     expect(response.message).toBe("What does that suggest to you?");
+  });
+
+  it('potty mouth', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "Go fuck yourself!", /* forgive the bad language, the "your" makes this an edgecase */
+    ]);
+    expect(response.message).toBe("Please try to use respectful language friend."); /* not "Why are you concerned over my elf?" */
   });
 });
