@@ -45,7 +45,7 @@ export function MessageNeeded({ forcedDialogue, clearForcedDialogue }: MessageNe
     }
   }, [forcedDialogue]);
 
-  if (!missingMessage.current) return null;
+  if (!missingMessage.current) return <div className={`${styles.placeholder}`}></div>;
 
   return (
     <div className={`${styles.placeholder}`} onClick={onClick}>
