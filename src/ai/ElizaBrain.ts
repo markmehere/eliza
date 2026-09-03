@@ -5,6 +5,7 @@ import {
   containsKeywordWithWildcard,
   findBasicKeywordFromKeywordWithWildcard,
   keywordsByWeight,
+  responseIsExhausted,
   responses,
   selectResponse,
 } from './aux/wresponses';
@@ -24,7 +25,7 @@ export class ElizaBrain {
     this.keywords = keywordsByWeight();
   }
 
-  analyzeOne(message: string, preamble = '') {
+  analyzeOne(message: string, preamble = '', covered?: Set<Dialogue>) {
     let found = false;
     let response: { message: string; which: Dialogue } | undefined;
     let newMessage = message.replace(/you're +/g, 'you are ');
@@ -37,6 +38,7 @@ export class ElizaBrain {
 
     for (let i = 0; i < this.keywords.length; i++) {
       word = this.keywords[i].word;
+      if (responseIsExhausted(word, covered)) continue;
 
       if (word[0] === '!' && containsKeywordWithWildcard(newMessage, word) && !found) {
         response = selectResponse(findBasicKeywordFromKeywordWithWildcard(word), this.usedResponses);
@@ -97,7 +99,7 @@ export class ElizaBrain {
     return response!;
   }
 
-  analyze(exchange: string[], becameSane = false) {
+  analyze(exchange: string[], becameSane = false, covered?: Set<Dialogue>) {
     const last = processInput(exchange[exchange.length - 1]);
     const beforeLast = processInput(exchange[exchange.length - 3]);
     const preamble = becameSane ? "I think it's important to note we've made real progress in our sessions. So... " :
@@ -130,7 +132,7 @@ export class ElizaBrain {
         which: Dialogue.ELABORATE,
       };
     } else {
-      return this.analyzeOne(last, preamble);
+      return this.analyzeOne(last, preamble, covered);
     }
   }
 }

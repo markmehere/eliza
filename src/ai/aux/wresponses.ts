@@ -428,6 +428,12 @@ function findResponsesForSimilarWord(word: string) {
   return undefined;
 }
 
+export function responseIsExhausted(word: string, covered?: Set<Dialogue>) {
+  if (!covered) return false;
+  if (responses[word].responses.length === 1 && covered.has(responses[word].which)) return true;
+  return false;
+}
+
 export function selectResponse(word: string, usedResponses: string[]) {
   let potentialResponse: { weight: number; responses: string[]; which: Dialogue } | undefined;
 

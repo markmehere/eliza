@@ -41,7 +41,8 @@ export const useChat = create<ChatStore>()(
         });
         const newResponse = eliza.analyze(
           chat,
-          announcedSanity !== oldAnnouncedSanity && chat.length > 3
+          announcedSanity !== oldAnnouncedSanity && chat.length > 3,
+          get().covered
         );
         get().addResponse(newResponse.message, newResponse.which);
       },
