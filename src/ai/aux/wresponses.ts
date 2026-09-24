@@ -334,6 +334,41 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     weight: 1,
     responses: ['You seem quite certain?', 'You seem quite sure of this?'],
     which: Dialogue.CERTAIN,
+  },
+  told: {
+    weight: 5,
+    responses: ['It\'s difficult when others don\'t hear what people say to them.'],
+    which: Dialogue.TOLD
+  },
+  'make me': {
+    weight: 3,
+    responses: [
+      'Ultimately you are the only one who controls your actions and emotions.'
+    ],
+    which: Dialogue.MADEME
+  },
+  'made me': {
+    weight: 3,
+    responses: [
+      'Ultimately you are the only one who controls your actions and emotions.'
+    ],
+    which: Dialogue.MADEME
+  },
+  'not my fault': {
+    weight: 4,
+    responses: [
+      'What made you believe that others thought it was your fault?',
+      'Is it possible it\'s nobody\'s fault? Just an unfortunate set of circumstances.'
+    ],
+    which: Dialogue.FAULT
+  },
+  'my fault': {
+    weight: 3,
+    responses: [
+      'How does blaming yourself help? Indeed, why is blame necessary at all?',
+      'What makes you believe this was in your control?',
+    ],
+    which: Dialogue.FAULT
   }
 };
 
@@ -430,7 +465,8 @@ function findResponsesForSimilarWord(word: string) {
 
 export function responseIsExhausted(word: string, covered?: Set<Dialogue>) {
   if (!covered) return false;
-  if (responses[word].responses.length === 1 && covered.has(responses[word].which)) return true;
+  if (word in responses && responses[word].responses.length === 1 && covered.has(responses[word].which)) return true;
+  else if (findResponsesForSimilarWord(word)?.responses.length === 1 && covered.has(findResponsesForSimilarWord(word)?.which as Dialogue)) return true;
   return false;
 }
 

@@ -1,5 +1,5 @@
 import { Dialogue } from '../constants/Dialogue';
-import { greetings, isNotClear, moreThanOneWord, notClearResponse, oneWordExcluded, repetition } from './aux/mresponses';
+import { greetings, isNotClear, marksOneoff, moreThanOneWord, notClearResponse, oneWordExcluded, repetition } from './aux/mresponses';
 import { processInput, replaceWords } from './aux/replaceWords';
 import {
   containsKeywordWithWildcard,
@@ -16,6 +16,8 @@ export class ElizaBrain {
   endChatTerms = ['goodbye', 'i have to leave', 'quit', 'bye', 'exit'];
 
   usedResponses: string[] = [];
+
+  usedThisSession: Set<Dialogue> = new Set();
 
   conversationOver = false;
 
@@ -38,9 +40,9 @@ export class ElizaBrain {
 
     for (let i = 0; i < this.keywords.length; i++) {
       word = this.keywords[i].word;
-      if (responseIsExhausted(word, covered)) continue;
 
       if (word[0] === '!' && containsKeywordWithWildcard(newMessage, word) && !found) {
+        if (responseIsExhausted(findBasicKeywordFromKeywordWithWildcard(word), covered)) continue;
         response = selectResponse(findBasicKeywordFromKeywordWithWildcard(word), this.usedResponses);
         found = true;
         break;
@@ -50,6 +52,7 @@ export class ElizaBrain {
           newMessage.indexOf(` ${word}`) !== -1) &&
         !found
       ) {
+        if (responseIsExhausted(word, covered)) continue;
         response = selectResponse(word, this.usedResponses);
         found = true;
         break;
@@ -132,7 +135,8 @@ export class ElizaBrain {
         which: Dialogue.ELABORATE,
       };
     } else {
-      return this.analyzeOne(last, preamble, covered);
+      return marksOneoff(last, this.usedThisSession) ||
+        this.analyzeOne(last, preamble, covered);
     }
   }
 }

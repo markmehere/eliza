@@ -118,4 +118,100 @@ describe('ElizaBrain', () => {
     ]);
     expect(response.message).toBe("Please try to use respectful language friend."); /* not "Why are you concerned over my elf?" */
   });
+
+  it('do you mind if', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "Do you mind if I take off my shirt?",
+    ]);
+    expect(response.message).toBe("Why would I mind if you take off your shirt?");
+  });
+
+  it('i want to fly', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "I want to fly!",
+    ]);
+    expect(response.message).toBe("The desire to fly is quite common.");
+  });
+
+  it('i hope you will', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "I want you to help me fly!",
+    ]);
+    expect(response.message).toBe("I\'ll try my best to help you fly.");
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "I hope you will help me fly!",
+    ]);
+    expect(response2.message).toBe("I\'ll try my best to help you fly.");
+    const response3 = brain.analyze([
+      ...basicExchange,
+      "I need you to help me fly!",
+    ]);
+    expect(response3.message).toBe("I\'ll try my best to help you fly.");
+  });
+
+  it('never/ever/always', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "I always end up alone!",
+    ]);
+    expect(response.message).toBe("Why do you think you always end up alone?");
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "I never ever want to sing!",
+    ]);
+    expect(response2.message).toBe("Why do you think you never want to sing?");
+    const response3 = brain.analyze([
+      ...basicExchange,
+      "Sam never takes out the washing!",
+    ]);
+    expect(response3.message).toBe("Why do you think they never take out the washing?");
+    const response4 = brain.analyze([
+      ...basicExchange,
+      "Bobby always messes things up!",
+    ]);
+    expect(response4.message).toBe("Why do you think they always mess things up?");
+    const response5 = brain.analyze([
+      ...basicExchange,
+      "She always eats alone!",
+    ]);
+    expect(response5.message).toBe("Why do you think they always eat alone?");
+  });
+
+  it('told', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "I told her several times not to do that!",
+    ]);
+    expect(response.message).toBe("It's difficult when others don't hear what people say to them.");
+  });
+
+  it('made me', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "She made me so angry!",
+    ]);
+    expect(response.message).toBe("Ultimately you are the only one who controls your actions and emotions.");
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "I'm so furious - they made me go to this stupid dinner!",
+    ]);
+    expect(response2.message).toBe("Ultimately you are the only one who controls your actions and emotions.");
+  });
+
+  it('fault', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "It's not my fault she can't read basic English!",
+    ]);
+    expect(response.message).toBe("What made you believe that others thought it was your fault?");
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "It's all my fault! The dinner was ruined and she had to leave early to wash the dress.",
+    ]);
+    expect(response2.message).toBe("How does blaming yourself help? Indeed, why is blame necessary at all?");
+  });
 });
