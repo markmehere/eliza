@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { Dialogue, dialogueTranslation } from '../../constants/Dialogue';
 import { useChat } from '../../hooks/useChat';
-import styles from './CompletionBar.module.css';
 import { SaneStamp } from '../SaneStamp/SaneStamp';
+import styles from './CompletionBar.module.css';
 
 interface CompletionBarProps {
   className?: string;
@@ -58,15 +58,22 @@ export function CompletionBar({ className, forceDialogue }: CompletionBarProps) 
       >
         <div className={styles.modalHeader}>
           <h2>Residual Therapeutic Touchstones</h2>
-          <button className={styles.closeButton} onClick={() => setShowCompletionModal(false)} aria-label="Close">
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={() => setShowCompletionModal(false)}
+            aria-label="Close"
+          >
             ✕
           </button>
         </div>
-        {progress >= total && <div className={styles.modalReset}>
-          <button className={styles.resetButton} onClick={reset}>
-            Reset all therapeutic responses
-          </button>
-        </div>}
+        {progress >= total && (
+          <div className={styles.modalReset}>
+            <button type="button" className={styles.resetButton} onClick={reset}>
+              Reset all therapeutic responses
+            </button>
+          </div>
+        )}
         <div className={styles.modalBody}>
           {Array.from({ length: Dialogue.LAST }, (_, key) => key).map((key) => {
             const onClick = !covered.has(key)
@@ -102,7 +109,7 @@ export function CompletionBar({ className, forceDialogue }: CompletionBarProps) 
         </div>
       </Modal>
       <div className={`${className} ${styles.bar}`} onClick={() => setShowCompletionModal(true)}>
-        {(progress >= total) && <SaneStamp />}
+        {progress >= total && <SaneStamp />}
         <div className={styles.container}>
           <div className={styles.trackBackground}>
             {/* Animated Fill */}

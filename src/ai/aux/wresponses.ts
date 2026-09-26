@@ -18,11 +18,11 @@ const synonyms: Record<string, string[]> = {
   absolutely: ['definitely', 'certainly', 'yes', '100%', 'yep'],
   'i think': ['i believe'],
   no: ['nup'],
-  'i desire': [ 'i want to' ],
+  'i desire': ['i want to'],
   remember: ['often think of'],
   point: ['reason'],
   'thinks i': ['believes i'],
-  'made me': ['makes me']
+  'made me': ['makes me'],
 };
 
 export const responses: Record<string, { weight: number; responses: string[]; which: Dialogue }> = {
@@ -232,11 +232,7 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   if: {
     weight: 3,
-    responses: [
-      "Do you think it's likely that *?",
-      'Do you wish that *?',
-      'Really, if *?',
-    ],
+    responses: ["Do you think it's likely that *?", 'Do you wish that *?', 'Really, if *?'],
     which: Dialogue.IF,
   },
   name: {
@@ -325,22 +321,21 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   'used to': {
     weight: 2,
-    responses: [
-      'Many find there is comfort in the mundane?',
-      'How do you feel about habits and rituals, now?'
-    ],
+    responses: ['Many find there is comfort in the mundane?', 'How do you feel about habits and rituals, now?'],
     which: Dialogue.IUSEDTO,
   },
   trying: {
     weight: 2,
-    responses: [
-      'It is frustrating when one\'s best efforts don\'t pay off.'
-    ],
-    which: Dialogue.TRYING
+    responses: ["It is frustrating when one's best efforts don't pay off."],
+    which: Dialogue.TRYING,
   },
   shit: {
     weight: 4,
-    responses: ['Please try to use respectful language @.', "Let's try to lower the intensity a bit @.", 'I always try to avoid swear words.'],
+    responses: [
+      'Please try to use respectful language @.',
+      "Let's try to lower the intensity a bit @.",
+      'I always try to avoid swear words.',
+    ],
     which: Dialogue.SWEAR,
   },
   oral: {
@@ -350,7 +345,11 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   hate: {
     weight: 3,
-    responses: ['Try not to let your anger control you.', 'Have you tried to temper your emotions?', "It's best to avoid such strong phrasing if you can."],
+    responses: [
+      'Try not to let your anger control you.',
+      'Have you tried to temper your emotions?',
+      "It's best to avoid such strong phrasing if you can.",
+    ],
     which: Dialogue.HATE,
   },
   absolutely: {
@@ -360,23 +359,21 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   told: {
     weight: 5,
-    responses: ['It\'s difficult when others don\'t hear what people say to them.'],
-    which: Dialogue.TOLD
+    responses: ["It's difficult when others don't hear what people say to them."],
+    which: Dialogue.TOLD,
   },
   'made me': {
     weight: 3,
-    responses: [
-      'Ultimately you are the only one who controls your actions and emotions.'
-    ],
-    which: Dialogue.MADEME
+    responses: ['Ultimately you are the only one who controls your actions and emotions.'],
+    which: Dialogue.MADEME,
   },
   'not my fault': {
     weight: 4,
     responses: [
       'What made you believe that others thought it was your fault?',
-      'Is it possible it\'s nobody\'s fault? Just an unfortunate set of circumstances.'
+      "Is it possible it's nobody's fault? Just an unfortunate set of circumstances.",
     ],
-    which: Dialogue.FAULT
+    which: Dialogue.FAULT,
   },
   'my fault': {
     weight: 3,
@@ -384,50 +381,41 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
       'How does blaming yourself help? Indeed, why is blame necessary at all?',
       'What makes you believe this was in your control?',
     ],
-    which: Dialogue.FAULT
+    which: Dialogue.FAULT,
   },
   point: {
     weight: 4,
     responses: [
       'What if there was no point? How would that make you feel?',
       'Ambiguity can be difficult to manage.',
-      'Maybe there is no point? But is that really an issue?'
+      'Maybe there is no point? But is that really an issue?',
     ],
-    which: Dialogue.POINT
+    which: Dialogue.POINT,
   },
   'thinks i': {
     weight: 2,
     responses: [
-      'Why do other\'s opinions matter to you?',
+      "Why do other's opinions matter to you?",
       'And what do you believe?',
-      'But surely you recognise you cannot control the opinion of others?'
+      'But surely you recognise you cannot control the opinion of others?',
     ],
-    which: Dialogue.THINKSI
+    which: Dialogue.THINKSI,
   },
   'able to': {
     weight: 5,
-    responses: [
-      'Would you like to * more?',
-      'Why can\'t you * more?',
-    ],
-    which: Dialogue.ABLETO
+    responses: ['Would you like to * more?', "Why can't you * more?"],
+    which: Dialogue.ABLETO,
   },
   'conversation is': {
     weight: 8,
-    responses: [
-      'Why do you feel this conversation is *?',
-      'How can I improve this conversation for you?'
-    ],
-    which: Dialogue.CONVERSATIONIS
+    responses: ['Why do you feel this conversation is *?', 'How can I improve this conversation for you?'],
+    which: Dialogue.CONVERSATIONIS,
   },
   'conversation makes me': {
     weight: 8,
-    responses: [
-      'Why does this conversation make you *?',
-      'What can I do to improve this conversation?'
-    ],
-    which: Dialogue.CONVERSATIONIS
-  }
+    responses: ['Why does this conversation make you *?', 'What can I do to improve this conversation?'],
+    which: Dialogue.CONVERSATIONIS,
+  },
 };
 
 export const responsesWithWildcard: Record<string, { weight: number; replacementWord: string }> = {
@@ -524,7 +512,11 @@ function findResponsesForSimilarWord(word: string) {
 export function responseIsExhausted(word: string, covered?: Set<Dialogue>) {
   if (!covered) return false;
   if (word in responses && responses[word].responses.length === 1 && covered.has(responses[word].which)) return true;
-  else if (findResponsesForSimilarWord(word)?.responses.length === 1 && covered.has(findResponsesForSimilarWord(word)?.which as Dialogue)) return true;
+  else if (
+    findResponsesForSimilarWord(word)?.responses.length === 1 &&
+    covered.has(findResponsesForSimilarWord(word)?.which as Dialogue)
+  )
+    return true;
   return false;
 }
 
@@ -568,7 +560,11 @@ export function selectResponse(word: string, usedResponses: string[]) {
 }
 
 export function containsKeywordWithWildcard(input: string, keywordsWithWildcardStr: string) {
-  return input.match(new RegExp(keywordsWithWildcardStr.substring(1))) && input.indexOf('unhappy') === -1 && input.indexOf('not') === -1;
+  return (
+    input.match(new RegExp(keywordsWithWildcardStr.substring(1))) &&
+    input.indexOf('unhappy') === -1 &&
+    input.indexOf('not') === -1
+  );
 }
 
 export function findBasicKeywordFromKeywordWithWildcard(keywordsWithWildcardStr: string) {

@@ -274,7 +274,9 @@
   border: 1px solid rgb(254 202 202);
   color: rgb(153 27 27);
 
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .resetButton:hover {

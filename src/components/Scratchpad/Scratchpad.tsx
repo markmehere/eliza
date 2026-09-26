@@ -11,7 +11,7 @@ interface ScratchpadProps {
   clearForcedDialogue: () => void;
 }
 
-export function Scratchpad({ className, forcedDialogue, clearForcedDialogue, simplified, ghost}: ScratchpadProps) {
+export function Scratchpad({ className, forcedDialogue, clearForcedDialogue, simplified, ghost }: ScratchpadProps) {
   const chat = useChat((state) => state.chat);
   const [revealed, setRevealed] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -20,7 +20,7 @@ export function Scratchpad({ className, forcedDialogue, clearForcedDialogue, sim
 
   useEffect(() => {
     if (simplified) {
-      document.getElementById("root")!.scrollTo(0, 0);
+      document.getElementById('root')!.scrollTo(0, 0);
       return;
     }
     const revealInterval = setInterval(() => {
@@ -37,46 +37,48 @@ export function Scratchpad({ className, forcedDialogue, clearForcedDialogue, sim
     maxChatLen.current = chat.length;
   }, [chat.length, ghost?.length]);
 
-
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [chat.length % 2 ? (chat?.[chat.length - 1] || '').substring(0, revealed) : '']);
 
-
   if (simplified) {
-    return <div ref={scrollRef} className={styles.simparent}>
-      {chat.map((conv, i) => {
-        const lines = conv.replace(/\r\n?/g, '\n').split('\n\n');
-        if (lines.length === 1) {
-          if (i % 2) {
-            return <p key={i}>{lines[0]}</p>;
-          } else if (i >= maxChatLen.current) {
-            return (
-              <p key={i} className="font-bold">
-                &nbsp;
-              </p>
-            );
+    return (
+      <div ref={scrollRef} className={styles.simparent}>
+        {chat.map((conv, i) => {
+          const lines = conv.replace(/\r\n?/g, '\n').split('\n\n');
+          if (lines.length === 1) {
+            if (i % 2) {
+              return <p key={i}>{lines[0]}</p>;
+            } else if (i >= maxChatLen.current) {
+              return (
+                <p key={i} className="font-bold">
+                  &nbsp;
+                </p>
+              );
+            } else {
+              return (
+                <p key={i} className="font-bold">
+                  {lines[0]}
+                </p>
+              );
+            }
           } else {
-            return (
-              <p key={i} className="font-bold">
-                {lines[0]}
+            return lines.map((line, c) => (
+              <p key={`${i}-${c}`} className={styles.multi}>
+                {line}
               </p>
-            );
+            ));
           }
-        } else {
-          return lines.map((line, c) => (
-            <p key={`${i}-${c}`} className={styles.multi}>
-              {line}
-            </p>
-          ));
-        }
-      })}
-      {ghost && <p key={`ghost`} className="italic">
-        {ghost}
-      </p>}
-    </div>;
+        })}
+        {ghost && (
+          <p key={`ghost`} className="italic">
+            {ghost}
+          </p>
+        )}
+      </div>
+    );
   }
 
   return (

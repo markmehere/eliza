@@ -1,5 +1,13 @@
 import { Dialogue } from '../constants/Dialogue';
-import { greetings, isNotClear, marksOneoff, moreThanOneWord, notClearResponse, oneWordExcluded, repetition } from './aux/mresponses';
+import {
+  greetings,
+  isNotClear,
+  marksOneoff,
+  moreThanOneWord,
+  notClearResponse,
+  oneWordExcluded,
+  repetition,
+} from './aux/mresponses';
 import { processInput, replaceWords } from './aux/replaceWords';
 import {
   containsKeywordWithWildcard,
@@ -32,7 +40,7 @@ export class ElizaBrain {
     let newMessage = message.replace(/you're +/g, 'you are ');
     let word = '';
 
-    if (this.endChatTerms.find(m => m.indexOf(newMessage) > -1)) {
+    if (this.endChatTerms.find((m) => m.indexOf(newMessage) > -1)) {
       this.conversationOver = true;
       newMessage = 'goodbye';
     }
@@ -72,11 +80,12 @@ export class ElizaBrain {
     }
 
     if (!word && response && response.message.indexOf('*') !== -1) {
-      response.message = response.message.replace(/ +\* */g, '')
-        .replace(/  +/g, ' ').replace(/ \?/g, '?');
-    }
-    else if (response) {
-      response.message = response.message.replace(/  +/g, ' ').replace(/ ([?|.])/g, (c) => c[1]);
+      response.message = response.message
+        .replace(/ +\* */g, '')
+        .replace(/ {2,}/g, ' ')
+        .replace(/ \?/g, '?');
+    } else if (response) {
+      response.message = response.message.replace(/ {2,}/g, ' ').replace(/ ([?|.])/g, (c) => c[1]);
     }
 
     if (response && response.message.indexOf('@') !== -1) {
@@ -87,7 +96,7 @@ export class ElizaBrain {
       response.message = preamble + response.message;
     }
 
-    response.message = response.message.replace(/\bi\b/g, s => s.toUpperCase());
+    response.message = response.message.replace(/\bi\b/g, (s) => s.toUpperCase());
 
     return response;
   }
@@ -95,8 +104,9 @@ export class ElizaBrain {
   analyze(exchange: string[], becameSane = false, covered?: Set<Dialogue>) {
     const last = processInput(exchange[exchange.length - 1]);
     const beforeLast = processInput(exchange[exchange.length - 3]);
-    const preamble = becameSane ? "I think it's important to note we've made real progress in our sessions. So... " :
-      '';
+    const preamble = becameSane
+      ? "I think it's important to note we've made real progress in our sessions. So... "
+      : '';
 
     if (exchange.length === 2) {
       const result = greetings(last);
@@ -114,19 +124,14 @@ export class ElizaBrain {
       return {
         message: preamble + notClearResponse(last).replace('@', this.name),
         which: Dialogue.NOTCLEAR,
-      }
-    } else if (
-      last.indexOf(' ') === -1 &&
-      beforeLast.indexOf(' ') === -1 &&
-      !oneWordExcluded(last)
-    ) {
+      };
+    } else if (last.indexOf(' ') === -1 && beforeLast.indexOf(' ') === -1 && !oneWordExcluded(last)) {
       return {
         message: preamble + moreThanOneWord(last),
         which: Dialogue.ELABORATE,
       };
     } else {
-      return marksOneoff(last, this.usedThisSession) ||
-        this.analyzeOne(last, preamble, covered);
+      return marksOneoff(last, this.usedThisSession) || this.analyzeOne(last, preamble, covered);
     }
   }
 }

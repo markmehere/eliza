@@ -40,7 +40,8 @@
   }
 }
 
-.scratchpad, .simparent {
+.scratchpad,
+.simparent {
   font-family: Arial, Helvetica, sans-serif;
   padding: 0 2rem 0 2rem;
 
@@ -63,7 +64,8 @@
 }
 
 @media (pointer: coarse) {
-  .scratchpad, .simparent {
+  .scratchpad,
+  .simparent {
     padding: 0 0.5rem 0 0.5rem;
   }
 }

@@ -32,8 +32,7 @@ export const useChat = create<ChatStore>()(
       addPrompt: (message: string) => {
         const chat = [...get().chat, message];
         const oldAnnouncedSanity = get().announcedSanity;
-        const announcedSanity = get().announcedSanity ||
-          get().covered.size >= get().threshold;
+        const announcedSanity = get().announcedSanity || get().covered.size >= get().threshold;
         set({
           chat,
           waitingForResponse: true,
@@ -43,7 +42,7 @@ export const useChat = create<ChatStore>()(
         const newResponse = eliza.analyze(
           chat,
           announcedSanity !== oldAnnouncedSanity && chat.length > 3,
-          get().covered
+          get().covered,
         );
         get().addResponse(newResponse.message, newResponse.which);
       },
@@ -84,9 +83,9 @@ export const useChat = create<ChatStore>()(
       },
       reset: () => {
         set({
-          covered: new Set()
+          covered: new Set(),
         });
-      }
+      },
     }),
     {
       name: 'eliza-store',

@@ -44,7 +44,12 @@ export function App() {
         <>
           {simplifiedMobile ? (
             <div>
-              <Scratchpad forcedDialogue={forcedDialogue} clearForcedDialogue={() => setForcedDialogue(-1)} ghost={combinedInput[0]} simplified />
+              <Scratchpad
+                forcedDialogue={forcedDialogue}
+                clearForcedDialogue={() => setForcedDialogue(-1)}
+                ghost={combinedInput[0]}
+                simplified
+              />
               <SendMessageBar combination={combinedInput} setSimplified={setSimplifiedMobile} simplified />
             </div>
           ) : (

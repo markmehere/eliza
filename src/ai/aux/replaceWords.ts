@@ -15,7 +15,7 @@ const wordsForReplacement: Record<string, string> = {
   yours: 'mine',
   'always had': 'always have',
   yourself: 'myself',
-  myself: 'yourself'
+  myself: 'yourself',
 };
 
 export function processInput(message?: string) {
@@ -48,10 +48,11 @@ export function replaceWords(input: string, stripFirstS?: boolean) {
       const replacementWord = wordsForReplacement[currentInputWord];
       newSplit[i] = replacementWord;
     } else {
-      if (i === 0 && stripFirstS) newSplit[i] = currentInputWord.replace(/([a-z][a-z])s$/, (s) => {
-        if (s[0] === 's') return 's';
-        return `${s[0]}${s[1]}`;
-      });
+      if (i === 0 && stripFirstS)
+        newSplit[i] = currentInputWord.replace(/([a-z][a-z])s$/, (s) => {
+          if (s[0] === 's') return 's';
+          return `${s[0]}${s[1]}`;
+        });
       else newSplit[i] = currentInputWord;
     }
   }

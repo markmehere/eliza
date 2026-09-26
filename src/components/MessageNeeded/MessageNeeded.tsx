@@ -43,7 +43,7 @@ export function MessageNeeded({ forcedDialogue, clearForcedDialogue }: MessageNe
       clearForcedDialogue();
       missingMessage.current = dt[forcedDialogue];
     }
-  }, [forcedDialogue]);
+  }, [forcedDialogue, clearForcedDialogue]);
 
   if (!missingMessage.current) return <div className={`${styles.placeholder}`}></div>;
 

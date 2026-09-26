@@ -2,10 +2,9 @@ import { useEffect } from 'react';
 import styles from './SaneStamp.module.css';
 
 export function SaneStamp() {
-
   useEffect(() => {
     if (window.saneShown) return;
-    let tid = setTimeout(() => window.saneShown = true, 1000);
+    const tid = setTimeout(() => (window.saneShown = true), 1000);
     return clearTimeout(tid);
   }, []);
 

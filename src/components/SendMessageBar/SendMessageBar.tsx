@@ -1,19 +1,15 @@
 import { motion } from 'framer-motion';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 'react';
 import { useChat } from '../../hooks/useChat';
 import styles from './SendMessageBar.module.css';
 
 interface SendMessageBarProps {
-  setSimplified: (value: boolean) => void,
-  simplified?: boolean
-  combination: [string, Dispatch<SetStateAction<string>>]
+  setSimplified: (value: boolean) => void;
+  simplified?: boolean;
+  combination: [string, Dispatch<SetStateAction<string>>];
 }
 
-export function SendMessageBar({
-  setSimplified,
-  simplified,
-  combination
-}: SendMessageBarProps) {
+export function SendMessageBar({ setSimplified, simplified, combination }: SendMessageBarProps) {
   const { readyForInput, addPrompt } = useChat();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
@@ -68,7 +64,7 @@ export function SendMessageBar({
         onKeyDown={handleKeyDown}
         placeholder="Type a message..."
         className={styles.messageInput}
-        onFocus={() => isTouchDevice ? setSimplified(true) : undefined}
+        onFocus={() => (isTouchDevice ? setSimplified(true) : undefined)}
         onBlur={() => setTimeout(() => setSimplified(false), 200)}
       />
 

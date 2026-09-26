@@ -1,5 +1,5 @@
-import { Dialogue } from "../../constants/Dialogue";
-import { replaceWords } from "./replaceWords";
+import { Dialogue } from '../../constants/Dialogue';
+import { replaceWords } from './replaceWords';
 
 function pick(choices: string[]) {
   return choices[Math.floor(choices.length * Math.random())];
@@ -55,7 +55,7 @@ export function greetings(rawName: string) {
       `Hello ${name}. How may I help you?`,
       `Welcome to the couch ${name}. What brings you to me?`,
     ]),
-    name
+    name,
   };
 }
 
@@ -71,8 +71,8 @@ export function moreThanOneWord(_ignored: string) {
   return pick([
     'It might help to respond with more than a single word.',
     'It might help to elaborate on your position.',
-    'I feel like you might have something more to say on this?'
-  ])
+    'I feel like you might have something more to say on this?',
+  ]);
 }
 
 export function oneWordExcluded(input: string) {
@@ -92,7 +92,7 @@ export function oneWordExcluded(input: string) {
     input.indexOf('what') > -1,
     input.indexOf('hi') > -1,
     input.indexOf('hello') > -1,
-    input.indexOf('certainly') > -1
+    input.indexOf('certainly') > -1,
   ].reduce((acc, val) => acc || val);
   return result;
 }
@@ -108,7 +108,7 @@ export function isNotClear(input: string) {
     input.indexOf('understand you') > -1,
     input.indexOf('huh') > -1,
     input === 'what',
-    input.indexOf('you trying to say') > -1
+    input.indexOf('you trying to say') > -1,
   ].reduce((acc, val) => acc || val);
 }
 
@@ -116,7 +116,7 @@ export function notClearResponse(_ignored: string) {
   return pick([
     'My apologies @, I sometimes get confused.',
     'I am very sorry for this.',
-    'I apologise for my lack of understanding of this.'
+    'I apologise for my lack of understanding of this.',
   ]);
 }
 
@@ -124,7 +124,7 @@ interface OneOffRecord {
   pattern: RegExp;
   responses: string[];
   which: Dialogue;
-  stripFirstS?: boolean
+  stripFirstS?: boolean;
 }
 
 const oneOffs: OneOffRecord[] = [
@@ -134,7 +134,7 @@ const oneOffs: OneOffRecord[] = [
       'Maybe in your fantasies we * each other?',
       'Seemingly we * each other.',
       'Maybe we both * one another?',
-      'Do you really believe we * one another?'
+      'Do you really believe we * one another?',
     ],
     which: Dialogue.IBLANKYOU,
   },
@@ -152,107 +152,80 @@ const oneOffs: OneOffRecord[] = [
       'As your therapist, it would be inappropriate for me to * you.',
       'Seemingly we * each other.',
       'Maybe we both * one another?',
-      'Do you really believe we * another?'
+      'Do you really believe we * another?',
     ],
     which: Dialogue.DOYOUBLANKME,
   },
   {
     pattern: /do you mind if i ([a-z ]+)/,
-    responses: [
-      'Why would I mind if you *?',
-      'Be my guest.'
-    ],
+    responses: ['Why would I mind if you *?', 'Be my guest.'],
     which: Dialogue.DOYOUMINDIF,
   },
   {
     pattern: /i want to ([a-z ']+)/,
-    responses: [
-      'The desire to * is quite common.',
-      'Is there any reason you think you won\'t be able to *?'
-    ],
+    responses: ['The desire to * is quite common.', "Is there any reason you think you won't be able to *?"],
     which: Dialogue.IWANTTO,
   },
   {
     pattern: /i (?:want|need|hope) you (?:will|to) ([a-z ]+)/,
-    responses: [
-      'I\'ll try my best to *.',
-      'I was hoping with my help you\'d do that yourself.',
-    ],
+    responses: ["I'll try my best to *.", "I was hoping with my help you'd do that yourself."],
     which: Dialogue.IHOPEYOUWILL,
   },
   {
     pattern: /how can you help me to ([a-z ]+)/,
-    responses: [
-      'I was hoping to help you help yourself to *.'
-    ],
+    responses: ['I was hoping to help you help yourself to *.'],
     which: Dialogue.HOWCANYOUHELP,
   },
   {
     pattern: /i used to ([a-z ])/,
-    responses: [
-      'Why do you think you are no longer able to *?',
-      'Do you think you could * again?'
-    ],
-    which: Dialogue.IUSEDTO
+    responses: ['Why do you think you are no longer able to *?', 'Do you think you could * again?'],
+    which: Dialogue.IUSEDTO,
   },
   {
     pattern: /i would have to ([a-z ])/,
-    responses: [
-      'Are you okay with having to *?',
-      'How much would that concern you?'
-    ],
-    which: Dialogue.IWOULDHAVETO
+    responses: ['Are you okay with having to *?', 'How much would that concern you?'],
+    which: Dialogue.IWOULDHAVETO,
   },
   {
     pattern: /i would have to ([a-z ])/,
-    responses: [
-      'Are you okay with having to *?',
-      'How much would that concern you?'
-    ],
-    which: Dialogue.IWOULDHAVETO
+    responses: ['Are you okay with having to *?', 'How much would that concern you?'],
+    which: Dialogue.IWOULDHAVETO,
   },
   {
     pattern: /i never(?: ever| )([a-z ]+)/,
-    responses: [
-      'Why do you think you never *?',
-    ],
-    which: Dialogue.NEVERALWAYS
+    responses: ['Why do you think you never *?'],
+    which: Dialogue.NEVERALWAYS,
   },
   {
     pattern: /i always ([a-z ]+)/,
-    responses: [
-      'Why do you think you always *?',
-    ],
-    which: Dialogue.NEVERALWAYS
+    responses: ['Why do you think you always *?'],
+    which: Dialogue.NEVERALWAYS,
   },
   {
     pattern: /ever ([a-z ]+)/,
     responses: [
       'Why do you think they never *?',
       'What would it mean to you if they were to *?',
-      'Do they really never *?'
+      'Do they really never *?',
     ],
     stripFirstS: true,
-    which: Dialogue.NEVERALWAYS
+    which: Dialogue.NEVERALWAYS,
   },
   {
     pattern: /never ([a-z ]+)/,
     responses: [
       'Why do you think they never *?',
       'What would it mean to you if they were to *?',
-      'Do they really never *?'
+      'Do they really never *?',
     ],
     stripFirstS: true,
-    which: Dialogue.NEVERALWAYS
+    which: Dialogue.NEVERALWAYS,
   },
   {
     pattern: /always ([a-z ]+)/,
-    responses: [
-      'Why do you think they always *?',
-      'What would it mean to you if they were to stop *?'
-    ],
+    responses: ['Why do you think they always *?', 'What would it mean to you if they were to stop *?'],
     stripFirstS: true,
-    which: Dialogue.NEVERALWAYS
+    which: Dialogue.NEVERALWAYS,
   },
 ];
 
@@ -262,14 +235,13 @@ export function marksOneoff(input: string, covered?: Set<Dialogue>) {
     if (covered && covered.has(oneOff.which)) continue;
     const matching = input.match(oneOff.pattern);
     if (matching) {
-      const message =
-        oneOff.responses[Math.floor(Math.random() * oneOff.responses.length)]
-          .replace('*', replaceWords(matching[1] || '', oneOff.stripFirstS))
-          .replace(/\bi\b/g, s => s.toUpperCase());
+      const message = oneOff.responses[Math.floor(Math.random() * oneOff.responses.length)]
+        .replace('*', replaceWords(matching[1] || '', oneOff.stripFirstS))
+        .replace(/\bi\b/g, (s) => s.toUpperCase());
       console.log(message);
       return {
         message,
-        which: oneOff.which
+        which: oneOff.which,
       };
     }
   }
