@@ -54,7 +54,7 @@ export class ElizaBrain {
         break;
       } else if (
         ((newMessage.indexOf(word) !== -1 && newMessage.length === word.length) ||
-          newMessage.indexOf(`${word} `) !== -1 ||
+          newMessage.indexOf(`${word} `.replace('  ', ' ')) !== -1 ||
           newMessage.indexOf(` ${word}`) !== -1) &&
         !response
       ) {

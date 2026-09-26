@@ -175,6 +175,13 @@ describe('ElizaBrain', () => {
 
   it('do you love me? (sometimes crashes)', () => {
     const response = brain.analyze([...basicExchange, 'Do you love me?']);
-    expect(response.message).toBe('Why do you feel this conversation is awful?');
+    expect(response.message).toBe('I would if I could, you are a very lovable person.');
+  });
+
+  it('your hair rocks', () => {
+    const response = brain.analyze([...basicExchange, 'Your hair rocks!']);
+    expect(response.message).toBe('Why are you concerned over whether my hair rocks?');
+    const response2 = brain.analyze([...basicExchange, 'And yours?']);
+    expect(response2.message).toBe('We were discussing you, not me.');
   });
 });

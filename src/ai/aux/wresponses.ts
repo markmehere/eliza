@@ -276,9 +276,9 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   'your ': {
     weight: 2,
     responses: [
-      'Why are you concerned over my *?',
-      'What about your own *?',
-      "Are you worried about someone else's *?",
+      'Why are you concerned over whether my *?',
+      'What about whether your own *?',
+      "Are you worried about whether someone else's *?",
       'Really, my *?',
     ],
     which: Dialogue.YOUR,
