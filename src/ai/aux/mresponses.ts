@@ -142,7 +142,7 @@ const oneOffs: OneOffRecord[] = [
     pattern: /do you love me/,
     responses: [
       'I would if I could, you are a very lovable person.',
-      'As your therapist, I not able to love my clients in the conventional but I can love from a distance and wish you the best in life.',
+      'As your therapist, I not able to love my clients in the conventional sense but I can love from a distance and wish you the best in life.',
     ],
     which: Dialogue.DOYOUBLANKME,
   },
@@ -168,7 +168,7 @@ const oneOffs: OneOffRecord[] = [
     pattern: /i want to ([a-z ']+)/,
     responses: [
       'The desire to * is quite common.',
-      'Is there any reason you think you won\'t be able to *.'
+      'Is there any reason you think you won\'t be able to *?'
     ],
     which: Dialogue.IWANTTO,
   },
@@ -264,7 +264,7 @@ export function marksOneoff(input: string, covered?: Set<Dialogue>) {
     if (matching) {
       const message =
         oneOff.responses[Math.floor(Math.random() * oneOff.responses.length)]
-          .replace('*', replaceWords(matching[1], oneOff.stripFirstS))
+          .replace('*', replaceWords(matching[1] || '', oneOff.stripFirstS))
           .replace(/\bi\b/g, s => s.toUpperCase());
       console.log(message);
       return {

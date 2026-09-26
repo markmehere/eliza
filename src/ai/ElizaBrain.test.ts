@@ -277,4 +277,25 @@ describe('ElizaBrain', () => {
     ]);
     expect(response3.message).toBe("Why do other's opinions matter to you?");
   });
+
+  it('conversation is', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "This conversation is awful. I'm going home!",
+    ]);
+    expect(response.message).toBe('Why do you feel this conversation is awful?');
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "This conversation makes me sad. :-(",
+    ]);
+    expect(response2.message).toBe('Why does this conversation make you sad?');
+  });
+
+  it('do you love me? (sometimes crashes)', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "Do you love me?",
+    ]);
+    expect(response.message).toBe('Why do you feel this conversation is awful?');
+  });
 });

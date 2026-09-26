@@ -257,6 +257,36 @@
   border-color: rgb(147 197 253);
 }
 
+.modalReset {
+  padding: 0.75rem;
+}
+
+.resetButton {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  width: 100%;
+
+  /* Matches the soft pastel tone of .incomplete */
+  background-color: rgb(254 242 242);
+  border: 1px solid rgb(254 202 202);
+  color: rgb(153 27 27);
+
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.resetButton:hover {
+  background-color: rgb(254 226 226);
+  border-color: rgb(252 165 165);
+}
+
+.resetButton:focus-visible {
+  outline: 2px solid rgb(252 165 165);
+  outline-offset: 2px;
+}
+
 .dialogueStatus {
   display: flex;
   align-items: center;

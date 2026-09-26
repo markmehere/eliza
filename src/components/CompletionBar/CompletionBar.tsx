@@ -12,7 +12,7 @@ interface CompletionBarProps {
 }
 
 export function CompletionBar({ className, forceDialogue }: CompletionBarProps) {
-  const { covered, threshold } = useChat();
+  const { covered, threshold, reset } = useChat();
   const progress = covered.size;
   const total = Math.min(Dialogue.LAST, threshold);
   const [isHighlighting, setIsHighlighting] = useState(false);
@@ -62,6 +62,11 @@ export function CompletionBar({ className, forceDialogue }: CompletionBarProps) 
             ✕
           </button>
         </div>
+        {progress >= total && <div className={styles.modalReset}>
+          <button className={styles.resetButton} onClick={reset}>
+            Reset all therapeutic responses
+          </button>
+        </div>}
         <div className={styles.modalBody}>
           {Array.from({ length: Dialogue.LAST }, (_, key) => key).map((key) => {
             const onClick = !covered.has(key)

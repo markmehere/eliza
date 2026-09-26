@@ -53,7 +53,10 @@ export enum Dialogue {
   FAULT = 51,
   POINT = 52,
   THINKSI = 53,
-  LAST = 54,
+  TRYING = 54,
+  ABLETO = 55,
+  CONVERSATIONIS = 56,
+  LAST = 57,
 }
 
 export const dialogueTranslation = {
@@ -110,5 +113,8 @@ export const dialogueTranslation = {
   [Dialogue.MADEME]: 'Ultimately you are the only one who controls your actions and emotions.',
   [Dialogue.FAULT]: 'What made you believe that others thought it was your fault?',
   [Dialogue.POINT]: 'What if there was no point? How would that make you feel?',
-  [Dialogue.THINKSI]: 'Why do other\'s opinions matter to you?'
+  [Dialogue.THINKSI]: 'Why do other\'s opinions matter to you?',
+  [Dialogue.TRYING]: 'It is frustrating when one\'s best efforts don\'t pay off.',
+  [Dialogue.ABLETO]: 'Would you like to ... more?',
+  [Dialogue.CONVERSATIONIS]: 'Why do you feel this conversation is ...?'
 };

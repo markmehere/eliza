@@ -241,7 +241,7 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   name: {
     weight: 15,
-    responses: ['I am not interested in names.', "I've told you before, I do not care about names -- please continue."],
+    responses: ['I am not interested in names.', "I've told you before, I do not care about names - please continue."],
     which: Dialogue.NAME,
   },
   computer: {
@@ -277,7 +277,7 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     ],
     which: Dialogue.THEYARE,
   },
-  your: {
+  'your ': {
     weight: 2,
     responses: [
       'Why are you concerned over my *?',
@@ -322,6 +322,21 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     weight: 3,
     responses: ['What makes you bored?'],
     which: Dialogue.IAMBORED,
+  },
+  'used to': {
+    weight: 2,
+    responses: [
+      'Many find there is comfort in the mundane?',
+      'How do you feel about habits and rituals, now?'
+    ],
+    which: Dialogue.IUSEDTO,
+  },
+  trying: {
+    weight: 2,
+    responses: [
+      'It is frustrating when one\'s best efforts don\'t pay off.'
+    ],
+    which: Dialogue.TRYING
   },
   shit: {
     weight: 4,
@@ -388,6 +403,30 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
       'But surely you recognise you cannot control the opinion of others?'
     ],
     which: Dialogue.THINKSI
+  },
+  'able to': {
+    weight: 5,
+    responses: [
+      'Would you like to * more?',
+      'Why can\'t you * more?',
+    ],
+    which: Dialogue.ABLETO
+  },
+  'conversation is': {
+    weight: 8,
+    responses: [
+      'Why do you feel this conversation is *?',
+      'How can I improve this conversation for you?'
+    ],
+    which: Dialogue.CONVERSATIONIS
+  },
+  'conversation makes me': {
+    weight: 8,
+    responses: [
+      'Why does this conversation make you *?',
+      'What can I do to improve this conversation?'
+    ],
+    which: Dialogue.CONVERSATIONIS
   }
 };
 

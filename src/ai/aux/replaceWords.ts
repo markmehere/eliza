@@ -21,6 +21,7 @@ const wordsForReplacement: Record<string, string> = {
 export function processInput(message?: string) {
   return (message || '')
     .replace(/[;.?!:]/g, '. ')
+    .replace(/ - /g, '. ')
     .replace(/,/g, '')
     .replace(/[\n ]+/g, ' ')
     .trim()
@@ -37,6 +38,7 @@ export function processInput(message?: string) {
   "live in my house" - the final returned value
 */
 export function replaceWords(input: string, stripFirstS?: boolean) {
+  if (!input) return '';
   const inputSplit = input.split(' ');
 
   const newSplit: string[] = [];

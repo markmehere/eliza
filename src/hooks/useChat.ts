@@ -14,6 +14,7 @@ type ChatStore = {
   talking: boolean;
   addPrompt: (message: string) => void;
   addResponse: (message: string, which: Dialogue, delay?: number) => void;
+  reset: () => void;
 };
 
 const eliza = new ElizaBrain();
@@ -81,6 +82,11 @@ export const useChat = create<ChatStore>()(
           }
         }, delay);
       },
+      reset: () => {
+        set({
+          covered: new Set()
+        });
+      }
     }),
     {
       name: 'eliza-store',
