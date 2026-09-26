@@ -51,7 +51,9 @@ export enum Dialogue {
   TOLD = 49,
   MADEME = 50,
   FAULT = 51,
-  LAST = 52,
+  POINT = 52,
+  THINKSI = 53,
+  LAST = 54,
 }
 
 export const dialogueTranslation = {
@@ -106,5 +108,7 @@ export const dialogueTranslation = {
   [Dialogue.NEVERALWAYS]: 'Why do you think they never ...?',
   [Dialogue.TOLD]: 'It is a struggle when people don\'t hear what we say.',
   [Dialogue.MADEME]: 'Ultimately you are the only one who controls your actions and emotions.',
-  [Dialogue.FAULT]: 'What made you believe that others thought it was your fault?'
+  [Dialogue.FAULT]: 'What made you believe that others thought it was your fault?',
+  [Dialogue.POINT]: 'What if there was no point? How would that make you feel?',
+  [Dialogue.THINKSI]: 'Why do other\'s opinions matter to you?'
 };

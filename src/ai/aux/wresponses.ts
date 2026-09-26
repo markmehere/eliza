@@ -19,7 +19,10 @@ const synonyms: Record<string, string[]> = {
   'i think': ['i believe'],
   no: ['nup'],
   'i desire': [ 'i want to' ],
-  remember: [ 'often think of' ],
+  remember: ['often think of'],
+  point: ['reason'],
+  'thinks i': ['believes i'],
+  'made me': ['makes me']
 };
 
 export const responses: Record<string, { weight: number; responses: string[]; which: Dialogue }> = {
@@ -50,7 +53,12 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
   },
   because: {
     weight: 6,
-    responses: ['Is that the real reason?'],
+    responses: ['Is that the real reason?', 'I worry that you are making excuses.'],
+    which: Dialogue.BECAUSE,
+  },
+  but: {
+    weight: 1,
+    responses: ['Is that the real reason?', 'I worry that you are making excuses.'],
     which: Dialogue.BECAUSE,
   },
   maybe: {
@@ -340,13 +348,6 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     responses: ['It\'s difficult when others don\'t hear what people say to them.'],
     which: Dialogue.TOLD
   },
-  'make me': {
-    weight: 3,
-    responses: [
-      'Ultimately you are the only one who controls your actions and emotions.'
-    ],
-    which: Dialogue.MADEME
-  },
   'made me': {
     weight: 3,
     responses: [
@@ -369,6 +370,24 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
       'What makes you believe this was in your control?',
     ],
     which: Dialogue.FAULT
+  },
+  point: {
+    weight: 4,
+    responses: [
+      'What if there was no point? How would that make you feel?',
+      'Ambiguity can be difficult to manage.',
+      'Maybe there is no point? But is that really an issue?'
+    ],
+    which: Dialogue.POINT
+  },
+  'thinks i': {
+    weight: 2,
+    responses: [
+      'Why do other\'s opinions matter to you?',
+      'And what do you believe?',
+      'But surely you recognise you cannot control the opinion of others?'
+    ],
+    which: Dialogue.THINKSI
   }
 };
 

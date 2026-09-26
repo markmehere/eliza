@@ -1,6 +1,6 @@
 const wordsForReplacement: Record<string, string> = {
   i: 'you',
-  you: 'i',
+  you: 'me',
   me: 'you',
   my: 'your',
   am: 'are',
@@ -13,16 +13,18 @@ const wordsForReplacement: Record<string, string> = {
   "you'll": 'i will',
   your: 'my',
   yours: 'mine',
-  'always had': 'alway have',
+  'always had': 'always have',
   yourself: 'myself',
   myself: 'yourself'
 };
 
 export function processInput(message?: string) {
   return (message || '')
-    .replace(/[,;.?!:]/g, '')
+    .replace(/[;.?!:]/g, '. ')
+    .replace(/,/g, '')
     .replace(/[\n ]+/g, ' ')
     .trim()
+    .replace(/\.$/, '')
     .toLowerCase();
 }
 
@@ -44,7 +46,6 @@ export function replaceWords(input: string, stripFirstS?: boolean) {
       const replacementWord = wordsForReplacement[currentInputWord];
       newSplit[i] = replacementWord;
     } else {
-      console.log(i === 0 ? (stripFirstS ? currentInputWord.replace(/([aeiou])s$/, (s) => s[1]) : 'notstripping') : '');
       if (i === 0 && stripFirstS) newSplit[i] = currentInputWord.replace(/([a-z][a-z])s$/, (s) => {
         if (s[0] === 's') return 's';
         return `${s[0]}${s[1]}`;

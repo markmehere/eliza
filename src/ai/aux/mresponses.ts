@@ -129,7 +129,7 @@ interface OneOffRecord {
 
 const oneOffs: OneOffRecord[] = [
   {
-    pattern: /i ([a-z ]+) you( [^w|t]|[^ ])/,
+    pattern: /i ([a-z]+) you( [^w|t]|[^ ])/,
     responses: [
       'Maybe in your fantasies we * each other?',
       'Seemingly we * each other.',
@@ -165,7 +165,7 @@ const oneOffs: OneOffRecord[] = [
     which: Dialogue.DOYOUMINDIF,
   },
   {
-    pattern: /i want to ([a-z ]+)/,
+    pattern: /i want to ([a-z ']+)/,
     responses: [
       'The desire to * is quite common.',
       'Is there any reason you think you won\'t be able to *.'
@@ -264,7 +264,9 @@ export function marksOneoff(input: string, covered?: Set<Dialogue>) {
     if (matching) {
       const message =
         oneOff.responses[Math.floor(Math.random() * oneOff.responses.length)]
-        .replace('*', replaceWords(matching[1], oneOff.stripFirstS));
+          .replace('*', replaceWords(matching[1], oneOff.stripFirstS))
+          .replace(/\bi\b/g, s => s.toUpperCase());
+      console.log(message);
       return {
         message,
         which: oneOff.which

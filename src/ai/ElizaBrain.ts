@@ -28,7 +28,6 @@ export class ElizaBrain {
   }
 
   analyzeOne(message: string, preamble = '', covered?: Set<Dialogue>) {
-    let found = false;
     let response: { message: string; which: Dialogue } | undefined;
     let newMessage = message.replace(/you're +/g, 'you are ');
     let word = '';
@@ -41,25 +40,23 @@ export class ElizaBrain {
     for (let i = 0; i < this.keywords.length; i++) {
       word = this.keywords[i].word;
 
-      if (word[0] === '!' && containsKeywordWithWildcard(newMessage, word) && !found) {
+      if (word[0] === '!' && containsKeywordWithWildcard(newMessage, word) && !response) {
         if (responseIsExhausted(findBasicKeywordFromKeywordWithWildcard(word), covered)) continue;
         response = selectResponse(findBasicKeywordFromKeywordWithWildcard(word), this.usedResponses);
-        found = true;
         break;
       } else if (
         ((newMessage.indexOf(word) !== -1 && newMessage.length === word.length) ||
           newMessage.indexOf(`${word} `) !== -1 ||
           newMessage.indexOf(` ${word}`) !== -1) &&
-        !found
+        !response
       ) {
         if (responseIsExhausted(word, covered)) continue;
         response = selectResponse(word, this.usedResponses);
-        found = true;
         break;
       }
     }
 
-    if (!found) {
+    if (!response) {
       response = {
         message: responses.NOTFOUND.responses[Math.floor(Math.random() * responses.NOTFOUND.responses.length)],
         which: Dialogue.NOTFOUND,
@@ -68,19 +65,10 @@ export class ElizaBrain {
     }
 
     if (word && response && response.message.indexOf('*') !== -1) {
-      const remainingInput = newMessage.substring(newMessage.indexOf(word) + word.length + 1, newMessage.length).trim();
-      const rightOfWildcardInResponse = response.message.substring(response.message.indexOf('*') + 1);
-      const startOfResponseToWildcard = response.message.substring(0, response.message.indexOf('*'));
-      const startOfInputMinusOneCharacter = remainingInput.substring(0, remainingInput.length - 1);
-      const remainingOfInputOnRight = remainingInput
-        .substring(remainingInput.length - 1, remainingInput.length)
-        .replace(/[^A-Za-z]/g, '')
-        .trim();
-
-      response.message =
-        startOfResponseToWildcard +
-        replaceWords(startOfInputMinusOneCharacter + remainingOfInputOnRight) +
-        rightOfWildcardInResponse;
+      const afterKeyword = newMessage.split(word)[1] ?? '';
+      const capturedText = afterKeyword.split('.')[0].trim();
+      const substituted = replaceWords(capturedText);
+      response.message = response.message.replace('*', substituted);
     }
 
     if (!word && response && response.message.indexOf('*') !== -1) {
@@ -99,7 +87,9 @@ export class ElizaBrain {
       response.message = preamble + response.message;
     }
 
-    return response!;
+    response.message = response.message.replace(/\bi\b/g, s => s.toUpperCase());
+
+    return response;
   }
 
   analyze(exchange: string[], becameSane = false, covered?: Set<Dialogue>) {

@@ -214,4 +214,67 @@ describe('ElizaBrain', () => {
     ]);
     expect(response2.message).toBe("How does blaming yourself help? Indeed, why is blame necessary at all?");
   });
+
+  it('eat dinner', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "I want to eat dinner with you.",
+    ]);
+    expect(response.message).toBe("The desire to eat dinner with me is quite common.");
+    brain = new ElizaBrain();
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "I want to know if you've been bad or good.",
+    ]);
+    expect(response2.message).toBe("The desire to know if I have been bad or good is quite common.");
+  });
+
+  it('point/reason', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "What is the point of all this?",
+    ]);
+    expect(response.message).toBe("What if there was no point? How would that make you feel?");
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "There was no reason for her to behave like that!",
+    ]);
+    expect(response2.message).toBe("What if there was no point? How would that make you feel?");
+    const response3 = brain.analyze([
+      ...basicExchange,
+      "I see no point in my life nor work.",
+    ]);
+    expect(response3.message).toBe("What if there was no point? How would that make you feel?");
+    const response4 = brain.analyze([
+      ...basicExchange,
+      "What is your point exactly?",
+    ]);
+    expect(response4.message).toBe("What if there was no point? How would that make you feel?");
+  });
+
+  it('respect punctuation', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      'Sometimes. Do I need better programming of you? I don\'t know.'
+    ]);
+    expect(response.message).toBe('Why do you need better programming of me?')
+  });
+
+  it('thinks i', () => {
+    const response = brain.analyze([
+      ...basicExchange,
+      "My dad thinks I made a mistake.",
+    ]);
+    expect(response.message).toBe("Why do other's opinions matter to you?");
+    const response2 = brain.analyze([
+      ...basicExchange,
+      "My friend believes I made a mistake",
+    ]);
+    expect(response2.message).toBe("Why do other's opinions matter to you?");
+    const response3 = brain.analyze([
+      ...basicExchange,
+      "She thinks I could do better.",
+    ]);
+    expect(response3.message).toBe("Why do other's opinions matter to you?");
+  });
 });
