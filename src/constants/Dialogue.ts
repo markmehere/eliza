@@ -56,7 +56,9 @@ export enum Dialogue {
   TRYING = 54,
   ABLETO = 55,
   CONVERSATIONIS = 56,
-  LAST = 57,
+  CHANGETHESUBJECT = 57,
+  RANDOM = 58,
+  LAST = 59,
 }
 
 export const dialogueTranslation = {
@@ -117,4 +119,6 @@ export const dialogueTranslation = {
   [Dialogue.TRYING]: "It is frustrating when one's best efforts don't pay off.",
   [Dialogue.ABLETO]: 'Would you like to ... more?',
   [Dialogue.CONVERSATIONIS]: 'Why do you feel this conversation is ...?',
+  [Dialogue.CHANGETHESUBJECT]: 'My apologies, sometimes I misjudge what my clients want to talk about.',
+  [Dialogue.RANDOM]: 'May I ask, if you could live anywhere in the world for a year, where would you choose?',
 };

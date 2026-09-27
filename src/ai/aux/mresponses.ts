@@ -229,6 +229,27 @@ const oneOffs: OneOffRecord[] = [
   },
 ];
 
+const randomResponsePreamble = ['May I ask, ', 'I want to change focus, so ', 'A change of topic might help. So '];
+
+const randomResponses = [
+  'if you could live anywhere in the world for a year, where would you choose?',
+  'do you find you make friends easily?',
+  'how often do you feel alone?',
+  'what would you say is the most important part of your life right now?',
+  'do you ever find yourself so angry that you no longer feel in control?',
+  'would you say you generally trust strangers, if not, why not?',
+  'if you were able to have a superpower, what would it be?',
+  'do you find yourself generally optimistic about the next five years?',
+  'do you find yourself worrying about money?',
+  'are you happy with your relationship status?',
+];
+
+let randomTopicIndex = Math.floor(Math.random() * randomResponses.length);
+
+export function getRandomTopicChange() {
+  return pick(randomResponsePreamble) + randomResponses[randomTopicIndex++ % randomResponses.length];
+}
+
 export function marksOneoff(input: string, covered?: Set<Dialogue>) {
   for (let i = 0; i < oneOffs.length; i++) {
     const oneOff = oneOffs[i];

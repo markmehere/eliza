@@ -1,5 +1,6 @@
 import { Dialogue } from '../constants/Dialogue';
 import {
+  getRandomTopicChange,
   greetings,
   isNotClear,
   marksOneoff,
@@ -26,6 +27,8 @@ export class ElizaBrain {
   usedResponses: string[] = [];
 
   usedThisSession: Set<Dialogue> = new Set();
+
+  whichLastResponse = Dialogue.LAST;
 
   conversationOver = false;
 
@@ -131,7 +134,17 @@ export class ElizaBrain {
         which: Dialogue.ELABORATE,
       };
     } else {
-      return marksOneoff(last, this.usedThisSession) || this.analyzeOne(last, preamble, covered);
+      const response = marksOneoff(last, this.usedThisSession) || this.analyzeOne(last, preamble, covered);
+      if (response.which === this.whichLastResponse && Math.random() < 0.8) {
+        this.whichLastResponse = Dialogue.RANDOM;
+        return {
+          message: getRandomTopicChange(),
+          which: Dialogue.RANDOM,
+        };
+      } else {
+        this.whichLastResponse = response.which;
+      }
+      return response;
     }
   }
 }

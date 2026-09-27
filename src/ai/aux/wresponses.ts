@@ -416,6 +416,14 @@ export const responses: Record<string, { weight: number; responses: string[]; wh
     responses: ['Why does this conversation make you *?', 'What can I do to improve this conversation?'],
     which: Dialogue.CONVERSATIONIS,
   },
+  'change the subject': {
+    weight: 6,
+    responses: [
+      'My apologies @, sometimes I misjudge what my clients want to talk about.',
+      'My apologies @, this is an opportunity to talk about what matters to you not me.',
+    ],
+    which: Dialogue.CHANGETHESUBJECT,
+  },
 };
 
 export const responsesWithWildcard: Record<string, { weight: number; replacementWord: string }> = {
